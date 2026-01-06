@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NMR Prediction Benchmark</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>NMR Prediction Benchmark</h1>
+            </div>
+            <nav class="nav">
+                <a href="#home">Home</a>
+                <a href="#benchmarks">Benchmarks</a>
+                <a href="#leaderboard">Leaderboard</a>
+                <a href="#submit">Submit</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="hero-title">NMR Prediction Benchmark Suite</h1>
+            <p class="hero-subtitle">A comprehensive benchmark for evaluating machine learning models on Nuclear Magnetic Resonance prediction tasks</p>
+            <div class="hero-buttons">
+                <a href="#benchmarks" class="btn btn-primary">Explore Benchmarks</a>
+                <a href="https://github.com/yourusername/nmr-prediction-benchmark" class="btn btn-secondary" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview">
+        <div class="container">
+            <h2>Overview</h2>
+            <p>The NMR Prediction Benchmark provides standardized datasets and evaluation metrics for four key NMR prediction tasks. Our goal is to advance the development of machine learning models for computational NMR spectroscopy.</p>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>4</h3>
+                    <p>Benchmark Tasks</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10K+</h3>
+                    <p>Molecules</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>NMR Spectra</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Model Submissions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benchmarks Section -->
+    <section class="benchmarks" id="benchmarks">
+        <div class="container">
+            <h2>Benchmark Tasks</h2>
+            <p class="section-intro">We provide four complementary benchmark tasks covering different aspects of NMR prediction:</p>
+
+            <div class="benchmark-grid">
+                <!-- Task 1: NMR2SMILES - Structure Elucidation -->
+                <div class="benchmark-card">
+                    <div class="benchmark-icon">
+                        <span>🔍</span>
+                    </div>
+                    <h3>NMR2SMILES</h3>
+                    <p class="benchmark-desc">Structure elucidation: predict molecular structures (SMILES) from NMR spectra using sequence-level and token-level evaluation.</p>
+                    <div class="benchmark-stats">
+                        <span><strong>Task:</strong> NMR → SMILES</span>
+                        <span><strong>Metrics:</strong> Top-K Accuracy, Fingerprint Similarity</span>
+                    </div>
+                    <a href="#task1" class="benchmark-link">View Details →</a>
+                </div>
+
+                <!-- Task 2: NMR2Func - Functional Group Prediction -->
+                <div class="benchmark-card">
+                    <div class="benchmark-icon">
+                        <span>⚛️</span>
+                    </div>
+                    <h3>NMR2Func</h3>
+                    <p class="benchmark-desc">Multi-label functional group prediction from NMR spectra to identify chemical functional groups in molecules.</p>
+                    <div class="benchmark-stats">
+                        <span><strong>Task:</strong> NMR → Functional Groups</span>
+                        <span><strong>Metrics:</strong> Macro/Micro F1, Accuracy</span>
+                    </div>
+                    <a href="#task2" class="benchmark-link">View Details →</a>
+                </div>
+
+                <!-- Task 3: NMR2Tox - Toxicity Prediction -->
+                <div class="benchmark-card">
+                    <div class="benchmark-icon">
+                        <span>⚠️</span>
+                    </div>
+                    <h3>NMR2Tox</h3>
+                    <p class="benchmark-desc">Multi-label toxicity prediction from NMR spectra to assess potential hazards of chemical compounds.</p>
+                    <div class="benchmark-stats">
+                        <span><strong>Task:</strong> NMR → Toxicity Labels</span>
+                        <span><strong>Metrics:</strong> Macro/Micro F1, Accuracy</span>
+                    </div>
+                    <a href="#task3" class="benchmark-link">View Details →</a>
+                </div>
+
+                <!-- Task 4: SMILES2NMR - Spectrum Simulation -->
+                <div class="benchmark-card">
+                    <div class="benchmark-icon">
+                        <span>📊</span>
+                    </div>
+                    <h3>SMILES2NMR</h3>
+                    <p class="benchmark-desc">Spectral simulation: generate NMR spectra from molecular structures (SMILES) for <sup>1</sup>H and <sup>13</sup>C nuclei.</p>
+                    <div class="benchmark-stats">
+                        <span><strong>Task:</strong> SMILES → NMR Spectrum</span>
+                        <span><strong>Metrics:</strong> Validity, Set/Vector Similarity</span>
+                    </div>
+                    <a href="#task4" class="benchmark-link">View Details →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Task Sections -->
+    <section class="task-details">
+        <div class="container">
+            <!-- Task 1 Details: NMR2SMILES -->
+            <div class="task-detail" id="task1">
+                <h2>Task 1: NMR2SMILES - Structure Elucidation</h2>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>Description</h3>
+                        <p>Structure elucidation from NMR spectra is a fundamental inverse problem in chemistry. This task evaluates models on predicting molecular structures (SMILES) from NMR spectral data, using both sequence-level and token-level metrics.</p>
+
+                        <h4>Task Details</h4>
+                        <ul>
+                            <li><strong>Input:</strong> NMR spectral features</li>
+                            <li><strong>Output:</strong> SMILES molecular representation</li>
+                            <li><strong>Methods:</strong> Search-based, Transformer-based, Diffusion-based</li>
+                        </ul>
+
+                        <h4>Evaluation Metrics</h4>
+                        <ul>
+                            <li><strong>Sequence-Level:</strong> Top-1, Top-5, Top-10 exact match accuracy (%)</li>
+                            <li><strong>Token-Level:</strong> Top-1, Top-5, Top-10 token accuracy (%)</li>
+                            <li><strong>Fingerprint Similarity:</strong> Morgan, Torsion, Atom-Pair (Tanimoto & Cosine)</li>
+                        </ul>
+                    </div>
+                    <div class="task-leaderboard">
+                        <h3>Top Models (Seq-Level Top-1)</h3>
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Model</th>
+                                    <th>Top-1</th>
+                                    <th>Top-5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>NMRMind +Formula</td>
+                                    <td>15.49%</td>
+                                    <td>29.82%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>NMR-Solver +Formula</td>
+                                    <td>12.41%</td>
+                                    <td>29.82%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>NMRMind</td>
+                                    <td>11.75%</td>
+                                    <td>23.22%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#submit" class="btn btn-small">Submit Your Model</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2 Details: NMR2Func -->
+            <div class="task-detail" id="task2">
+                <h2>Task 2: NMR2Func - Functional Group Prediction</h2>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>Description</h3>
+                        <p>Multi-label functional group prediction from NMR spectra. This task evaluates models' ability to identify chemical functional groups present in molecules based on their NMR spectral signatures.</p>
+
+                        <h4>Task Details</h4>
+                        <ul>
+                            <li><strong>Input:</strong> NMR spectral features</li>
+                            <li><strong>Output:</strong> Multi-label functional group classifications</li>
+                            <li><strong>Challenge:</strong> Imbalanced class distribution</li>
+                        </ul>
+
+                        <h4>Evaluation Metrics</h4>
+                        <ul>
+                            <li><strong>Macro/Micro Accuracy:</strong> Precision at functional group level</li>
+                            <li><strong>Macro/Micro Recall:</strong> Sensitivity of predictions</li>
+                            <li><strong>Macro/Micro F1:</strong> Harmonic mean of precision and recall</li>
+                            <li><strong>Subset Accuracy:</strong> Exact match of all labels</li>
+                        </ul>
+                    </div>
+                    <div class="task-leaderboard">
+                        <h3>Top Models (Macro F1)</h3>
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Model</th>
+                                    <th>Macro F1</th>
+                                    <th>Acc.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>NMR2Struct</td>
+                                    <td>61.22%</td>
+                                    <td>36.25%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>XGBoost</td>
+                                    <td>55.47%</td>
+                                    <td>45.68%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Random Forest</td>
+                                    <td>48.64%</td>
+                                    <td>36.14%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#submit" class="btn btn-small">Submit Your Model</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3 Details: NMR2Tox -->
+            <div class="task-detail" id="task3">
+                <h2>Task 3: NMR2Tox - Toxicity Prediction</h2>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>Description</h3>
+                        <p>Multi-label toxicity prediction from NMR spectra. This task evaluates models on their ability to predict potential toxicity hazards of chemical compounds directly from spectral data, which is important for drug safety and environmental chemistry.</p>
+
+                        <h4>Task Details</h4>
+                        <ul>
+                            <li><strong>Input:</strong> NMR spectral features</li>
+                            <li><strong>Output:</strong> Multi-label toxicity classifications</li>
+                            <li><strong>Challenge:</strong> Highly imbalanced dataset with rare toxic classes</li>
+                        </ul>
+
+                        <h4>Evaluation Metrics</h4>
+                        <ul>
+                            <li><strong>Macro/Micro Accuracy:</strong> Overall prediction accuracy</li>
+                            <li><strong>Macro/Micro Recall:</strong> Sensitivity to toxic compounds</li>
+                            <li><strong>Macro/Micro F1:</strong> Balance between precision and recall</li>
+                            <li><strong>Subset Accuracy:</strong> Complete toxicity profile match</li>
+                        </ul>
+                    </div>
+                    <div class="task-leaderboard">
+                        <h3>Top Models (Macro F1)</h3>
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Model</th>
+                                    <th>Macro F1</th>
+                                    <th>Acc.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>CNN</td>
+                                    <td>20.58%</td>
+                                    <td>32.08%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>MLP</td>
+                                    <td>18.76%</td>
+                                    <td>28.45%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>XGBoost</td>
+                                    <td>7.68%</td>
+                                    <td>50.77%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#submit" class="btn btn-small">Submit Your Model</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4 Details: SMILES2NMR -->
+            <div class="task-detail" id="task4">
+                <h2>Task 4: SMILES2NMR - Spectral Simulation</h2>
+                <div class="task-content">
+                    <div class="task-description">
+                        <h3>Description</h3>
+                        <p>NMR spectral simulation from molecular structures (SMILES). This forward prediction task evaluates models on generating realistic NMR spectra for both <sup>1</sup>H and <sup>13</sup>C nuclei, which is crucial for structure verification and experimental planning.</p>
+
+                        <h4>Task Details</h4>
+                        <ul>
+                            <li><strong>Input:</strong> SMILES molecular representation</li>
+                            <li><strong>Output:</strong> Simulated NMR spectrum</li>
+                            <li><strong>Nuclei:</strong> <sup>1</sup>H and <sup>13</sup>C</li>
+                            <li><strong>Methods:</strong> DFT-based (Cascade), Neural networks (NMRNet)</li>
+                        </ul>
+
+                        <h4>Evaluation Metrics</h4>
+                        <ul>
+                            <li><strong>Validity:</strong> Chemical validity of generated spectra (100%)</li>
+                            <li><strong>Set Similarity:</strong> Peak set overlap with ground truth</li>
+                            <li><strong>Vector Similarity:</strong> Spectral vector cosine similarity</li>
+                        </ul>
+                    </div>
+                    <div class="task-leaderboard">
+                        <h3>Top Models (Set Similarity)</h3>
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Model</th>
+                                    <th>Set Sim</th>
+                                    <th>Vec Sim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>NMRNet (¹³C)</td>
+                                    <td>0.908</td>
+                                    <td>0.849</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>NMRNet (¹H)</td>
+                                    <td>0.705</td>
+                                    <td>0.879</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Cascade (¹³C)-DFTNN</td>
+                                    <td>0.445</td>
+                                    <td>0.326</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#submit" class="btn btn-small">Submit Your Model</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-section" id="leaderboard">
+        <div class="container">
+            <h2>Overall Leaderboard</h2>
+            <p>Models ranked by average performance across all four benchmark tasks</p>
+
+            <div class="leaderboard-filters">
+                <button class="filter-btn active" data-filter="all">All Tasks</button>
+                <button class="filter-btn" data-filter="task1">NMR2SMILES</button>
+                <button class="filter-btn" data-filter="task2">NMR2Func</button>
+                <button class="filter-btn" data-filter="task3">NMR2Tox</button>
+                <button class="filter-btn" data-filter="task4">SMILES2NMR</button>
+            </div>
+
+            <table class="leaderboard-table-full">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Model Name</th>
+                        <th>Institution</th>
+                        <th>Average Score</th>
+                        <th>NMR2SMILES</th>
+                        <th>NMR2Func</th>
+                        <th>NMR2Tox</th>
+                        <th>SMILES2NMR</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>NMRMind +Formula</td>
+                        <td>Research Lab</td>
+                        <td>0.712</td>
+                        <td>0.755</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>2025-12</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>NMR2Struct</td>
+                        <td>University</td>
+                        <td>0.634</td>
+                        <td>0.620</td>
+                        <td>0.612</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>2025-11</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>NMRNet</td>
+                        <td>Institute</td>
+                        <td>0.879</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.879</td>
+                        <td>2025-10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Submit Section -->
+    <section class="submit-section" id="submit">
+        <div class="container">
+            <h2>Submit Your Model</h2>
+            <p>Ready to benchmark your model? Follow these steps to submit your predictions:</p>
+
+            <div class="submit-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Download Test Data</h3>
+                    <p>Download the test datasets for the tasks you want to evaluate.</p>
+                    <a href="#" class="btn btn-outline">Download Data</a>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Run Your Model</h3>
+                    <p>Generate predictions using your model on the test set.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Format Results</h3>
+                    <p>Format your predictions according to our submission guidelines.</p>
+                    <a href="#" class="btn btn-outline">View Format</a>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Submit</h3>
+                    <p>Submit your results via GitHub or our submission portal.</p>
+                    <a href="#" class="btn btn-primary">Submit Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2>About</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Mission</h3>
+                    <p>The NMR Prediction Benchmark aims to accelerate progress in computational NMR spectroscopy by providing standardized datasets and evaluation protocols for machine learning models.</p>
+
+                    <h3>Citation</h3>
+                    <div class="citation-box">
+                        <code>
+@article{nmr-benchmark-2025,<br>
+&nbsp;&nbsp;title={NMR Prediction Benchmark: A Comprehensive Evaluation Suite},<br>
+&nbsp;&nbsp;author={Your Name et al.},<br>
+&nbsp;&nbsp;journal={Journal Name},<br>
+&nbsp;&nbsp;year={2025}<br>
+}
+                        </code>
+                    </div>
+
+                    <h3>Contact</h3>
+                    <p>For questions or issues, please contact us at <a href="mailto:contact@nmr-benchmark.org">contact@nmr-benchmark.org</a> or open an issue on <a href="https://github.com/yourusername/nmr-prediction-benchmark" target="_blank">GitHub</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 NMR Prediction Benchmark. Licensed under MIT License.</p>
+            <div class="footer-links">
+                <a href="https://github.com/yourusername/nmr-prediction-benchmark" target="_blank">GitHub</a>
+                <a href="#">Documentation</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
