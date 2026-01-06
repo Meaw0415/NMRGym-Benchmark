@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Leaderboard - NMRGym</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .full-leaderboard {
+            padding: 4rem 0;
+            background-color: var(--background);
+        }
+        .task-section {
+            margin-bottom: 4rem;
+        }
+        .task-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        .task-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .full-table {
+            width: 100%;
+            background-color: var(--background);
+            border-collapse: collapse;
+            box-shadow: var(--shadow-md);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .full-table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .full-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .full-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .full-table tbody tr:hover {
+            background-color: var(--background-alt);
+        }
+        .full-table tbody tr:first-child {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        .full-table tbody tr:first-child td {
+            font-weight: 600;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .method-category {
+            font-weight: 700;
+            background-color: var(--background-alt);
+            font-style: italic;
+        }
+        .category-row td {
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            background-color: var(--background-alt);
+            border-bottom: 2px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>NMRGym</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="index.html#benchmarks">Benchmarks</a>
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="index.html#submit">Submit</a>
+                <a href="index.html#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Full Leaderboard Section -->
+    <section class="full-leaderboard">
+        <div class="container">
+            <a href="index.html#leaderboard" class="btn btn-outline back-button">← Back to Home</a>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Complete Leaderboard</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 3rem;">All models benchmarked across NMRGym tasks. Download datasets from <a href="https://huggingface.co/datasets/meaw0415/NMRGym" target="_blank" style="color: var(--primary-color);">HuggingFace</a>.</p>
+
+            <!-- Task 1: NMR2SMILES - Structure Elucidation -->
+            <div class="task-section">
+                <h2>Task 1: NMR2SMILES - Structure Elucidation</h2>
+                <p>Predict molecular structures (SMILES) from NMR spectra</p>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Sequence-Level & Token-Level Performance</h3>
+                <table class="full-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Top-1 Seq (%)</th>
+                            <th>Top-1 Token (%)</th>
+                            <th>Top-5 Seq (%)</th>
+                            <th>Top-5 Token (%)</th>
+                            <th>Top-10 Seq (%)</th>
+                            <th>Top-10 Token (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row">
+                            <td colspan="8"><em>Search-based Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>NMRMind +Formula</td>
+                            <td>15.49</td>
+                            <td>40.82</td>
+                            <td>29.82</td>
+                            <td>60.00</td>
+                            <td>34.03</td>
+                            <td>64.40</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NMR-Solver +Formula</td>
+                            <td>12.41</td>
+                            <td>23.04</td>
+                            <td>29.82</td>
+                            <td>38.53</td>
+                            <td>33.27</td>
+                            <td>40.87</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>NMR-Solver</td>
+                            <td>4.54</td>
+                            <td>19.14</td>
+                            <td>11.60</td>
+                            <td>32.22</td>
+                            <td>15.06</td>
+                            <td>37.75</td>
+                        </tr>
+
+                        <tr class="category-row">
+                            <td colspan="8"><em>Transformer-based Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>NMRMind</td>
+                            <td>11.75</td>
+                            <td>36.96</td>
+                            <td>23.22</td>
+                            <td>54.71</td>
+                            <td>27.00</td>
+                            <td>59.08</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>NMRFormer</td>
+                            <td>1.75</td>
+                            <td>22.49</td>
+                            <td>2.81</td>
+                            <td>29.58</td>
+                            <td>3.30</td>
+                            <td>32.32</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>NMR2Struct</td>
+                            <td>0.24</td>
+                            <td>21.97</td>
+                            <td>1.05</td>
+                            <td>33.65</td>
+                            <td>1.85</td>
+                            <td>38.67</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>CLAMS</td>
+                            <td>0.00</td>
+                            <td>7.90</td>
+                            <td>0.00</td>
+                            <td>12.78</td>
+                            <td>0.00</td>
+                            <td>14.70</td>
+                        </tr>
+
+                        <tr class="category-row">
+                            <td colspan="8"><em>Diffusion-based Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>ChefNMR-S (Finetune)</td>
+                            <td>1.69</td>
+                            <td>11.87</td>
+                            <td>3.87</td>
+                            <td>23.85</td>
+                            <td>5.04</td>
+                            <td>28.18</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>DiffNMR</td>
+                            <td>0.00</td>
+                            <td>17.37</td>
+                            <td>0.00</td>
+                            <td>25.37</td>
+                            <td>0.00</td>
+                            <td>28.49</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>ChefNMR-S</td>
+                            <td>0.02</td>
+                            <td>3.18</td>
+                            <td>0.04</td>
+                            <td>8.93</td>
+                            <td>0.05</td>
+                            <td>11.40</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>ChefNMR-L</td>
+                            <td>0.02</td>
+                            <td>3.70</td>
+                            <td>0.07</td>
+                            <td>10.16</td>
+                            <td>0.08</td>
+                            <td>13.29</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>ChefNMR-L (Finetune)</td>
+                            <td>0.00</td>
+                            <td>17.37</td>
+                            <td>0.00</td>
+                            <td>25.37</td>
+                            <td>0.00</td>
+                            <td>28.49</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Fingerprint Similarity (Tanimoto)</h3>
+                <table class="full-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Morgan Top-1</th>
+                            <th>Morgan Top-5</th>
+                            <th>Torsion Top-1</th>
+                            <th>Torsion Top-5</th>
+                            <th>Atom-Pair Top-1</th>
+                            <th>Atom-Pair Top-5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>NMRMind +Formula</td>
+                            <td>65.51</td>
+                            <td>72.80</td>
+                            <td>67.94</td>
+                            <td>75.63</td>
+                            <td>74.86</td>
+                            <td>81.15</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NMRMind</td>
+                            <td>61.14</td>
+                            <td>67.83</td>
+                            <td>63.47</td>
+                            <td>70.57</td>
+                            <td>69.56</td>
+                            <td>75.65</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>NMR-Solver +Formula</td>
+                            <td>43.31</td>
+                            <td>45.70</td>
+                            <td>44.00</td>
+                            <td>46.18</td>
+                            <td>46.00</td>
+                            <td>47.71</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>NMR2Struct</td>
+                            <td>35.18</td>
+                            <td>43.43</td>
+                            <td>32.79</td>
+                            <td>42.64</td>
+                            <td>39.54</td>
+                            <td>48.26</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>NMR-Solver</td>
+                            <td>33.28</td>
+                            <td>42.88</td>
+                            <td>34.63</td>
+                            <td>45.29</td>
+                            <td>45.65</td>
+                            <td>55.48</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>NMRFormer</td>
+                            <td>27.87</td>
+                            <td>40.94</td>
+                            <td>29.11</td>
+                            <td>43.52</td>
+                            <td>33.25</td>
+                            <td>49.44</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>ChefNMR-S (Finetune)</td>
+                            <td>17.17</td>
+                            <td>33.81</td>
+                            <td>18.72</td>
+                            <td>37.36</td>
+                            <td>26.18</td>
+                            <td>49.68</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>DiffNMR</td>
+                            <td>9.05</td>
+                            <td>13.33</td>
+                            <td>6.44</td>
+                            <td>12.22</td>
+                            <td>20.48</td>
+                            <td>28.95</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Task 2: NMR2Func - Functional Group Prediction -->
+            <div class="task-section">
+                <h2>Task 2: NMR2Func - Functional Group Prediction</h2>
+                <p>Multi-label functional group classification from NMR spectra</p>
+
+                <table class="full-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Macro Acc (%)</th>
+                            <th>Micro Acc (%)</th>
+                            <th>Macro Rec (%)</th>
+                            <th>Micro Rec (%)</th>
+                            <th>Macro F1 (%)</th>
+                            <th>Micro F1 (%)</th>
+                            <th>Subset Acc (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row">
+                            <td colspan="9"><em>State-of-Art Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>NMR2Struct</td>
+                            <td>93.30</td>
+                            <td>93.30</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>61.22</td>
+                            <td>81.69</td>
+                            <td>36.25</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>CLAMS</td>
+                            <td>91.20</td>
+                            <td>91.20</td>
+                            <td>51.89</td>
+                            <td>80.52</td>
+                            <td>39.37</td>
+                            <td>75.79</td>
+                            <td>21.48</td>
+                        </tr>
+
+                        <tr class="category-row">
+                            <td colspan="9"><em>Classic Classification Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>XGBoost</td>
+                            <td>94.85</td>
+                            <td>94.85</td>
+                            <td>45.02</td>
+                            <td>81.00</td>
+                            <td>55.47</td>
+                            <td>85.92</td>
+                            <td>45.68</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Random Forest</td>
+                            <td>93.11</td>
+                            <td>93.11</td>
+                            <td>41.97</td>
+                            <td>77.72</td>
+                            <td>48.64</td>
+                            <td>81.39</td>
+                            <td>36.14</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>MLP</td>
+                            <td>92.11</td>
+                            <td>92.11</td>
+                            <td>50.63</td>
+                            <td>81.88</td>
+                            <td>38.81</td>
+                            <td>77.63</td>
+                            <td>28.18</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>CNN</td>
+                            <td>91.95</td>
+                            <td>91.95</td>
+                            <td>51.45</td>
+                            <td>82.67</td>
+                            <td>38.14</td>
+                            <td>77.42</td>
+                            <td>25.37</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Task 3: NMR2Tox - Toxicity Prediction -->
+            <div class="task-section">
+                <h2>Task 3: NMR2Tox - Toxicity Prediction</h2>
+                <p>Multi-label toxicity classification from NMR spectra</p>
+
+                <table class="full-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Macro Acc (%)</th>
+                            <th>Micro Acc (%)</th>
+                            <th>Macro Rec (%)</th>
+                            <th>Micro Rec (%)</th>
+                            <th>Macro F1 (%)</th>
+                            <th>Micro F1 (%)</th>
+                            <th>Subset Acc (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>XGBoost</td>
+                            <td>91.91</td>
+                            <td>91.91</td>
+                            <td>4.76</td>
+                            <td>4.41</td>
+                            <td>7.68</td>
+                            <td>7.94</td>
+                            <td>50.77</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Random Forest</td>
+                            <td>91.77</td>
+                            <td>91.77</td>
+                            <td>2.01</td>
+                            <td>2.22</td>
+                            <td>3.22</td>
+                            <td>4.07</td>
+                            <td>51.19</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CNN</td>
+                            <td>84.22</td>
+                            <td>84.22</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>20.58</td>
+                            <td>26.42</td>
+                            <td>32.08</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>MLP</td>
+                            <td>75.88</td>
+                            <td>75.88</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>18.76</td>
+                            <td>21.55</td>
+                            <td>28.45</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Task 4: SMILES2NMR - Spectrum Simulation -->
+            <div class="task-section">
+                <h2>Task 4: SMILES2NMR - Spectral Simulation</h2>
+                <p>Generate NMR spectra from molecular structures (SMILES)</p>
+
+                <table class="full-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Nucleus</th>
+                            <th>Validity (%)</th>
+                            <th>Set Similarity</th>
+                            <th>Vector Similarity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row">
+                            <td colspan="6"><em>Open Source Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>NMRNet</td>
+                            <td><sup>13</sup>C</td>
+                            <td>100.0</td>
+                            <td>0.908</td>
+                            <td>0.849</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NMRNet</td>
+                            <td><sup>1</sup>H</td>
+                            <td>100.0</td>
+                            <td>0.705</td>
+                            <td>0.879</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Cascade - DFTNN</td>
+                            <td><sup>13</sup>C</td>
+                            <td>100.0</td>
+                            <td>0.445</td>
+                            <td>0.326</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Cascade - DFTNN</td>
+                            <td><sup>1</sup>H</td>
+                            <td>100.0</td>
+                            <td>0.231</td>
+                            <td>0.218</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Cascade - ExpNN-DFT</td>
+                            <td><sup>13</sup>C</td>
+                            <td>100.0</td>
+                            <td>0.147</td>
+                            <td>0.122</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Cascade - ExpNN-FF</td>
+                            <td><sup>13</sup>C</td>
+                            <td>100.0</td>
+                            <td>0.031</td>
+                            <td>0.056</td>
+                        </tr>
+
+                        <tr class="category-row">
+                            <td colspan="6"><em>Closed Source Methods</em></td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>Mnova</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 NMRGym. Licensed under MIT License.</p>
+            <div class="footer-links">
+                <a href="https://github.com/Meaw0415/nmr-prediction-benchmark" target="_blank">GitHub</a>
+                <a href="https://huggingface.co/datasets/meaw0415/NMRGym" target="_blank">Dataset</a>
+                <a href="#">Documentation</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

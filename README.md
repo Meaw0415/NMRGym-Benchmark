@@ -1,12 +1,14 @@
-# NMR Prediction Benchmark
+# NMRGym
 
 A comprehensive benchmark suite for evaluating machine learning models on Nuclear Magnetic Resonance (NMR) prediction tasks.
 
-🌐 **Live Demo**: [https://yourusername.github.io/nmr-prediction-benchmark](https://yourusername.github.io/nmr-prediction-benchmark)
+🌐 **Live Demo**: [https://meaw0415.github.io/nmr-prediction-benchmark](https://meaw0415.github.io/nmr-prediction-benchmark)
+
+📊 **Dataset**: [https://huggingface.co/datasets/meaw0415/NMRGym](https://huggingface.co/datasets/meaw0415/NMRGym)
 
 ## Overview
 
-The NMR Prediction Benchmark provides standardized datasets and evaluation metrics for four key NMR prediction tasks:
+NMRGym provides standardized datasets and evaluation metrics for four key NMR prediction tasks:
 
 1. **Chemical Shift Prediction** - Predict ¹H and ¹³C NMR chemical shifts from molecular structures
 2. **Coupling Constant Prediction** - Predict J-coupling constants between nuclei
