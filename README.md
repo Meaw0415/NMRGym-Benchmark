@@ -2,7 +2,7 @@
 
 A comprehensive benchmark suite for evaluating machine learning models on Nuclear Magnetic Resonance (NMR) prediction tasks.
 
-🌐 **Live Demo**: [https://meaw0415.github.io/nmr-prediction-benchmark](https://meaw0415.github.io/nmr-prediction-benchmark)
+🌐 **Live Demo**: [https://meaw0415.github.io/NMRGym-Benchmark](https://meaw0415.github.io/NMRGym-Benchmark)
 
 📊 **Dataset**: [https://huggingface.co/datasets/meaw0415/NMRGym](https://huggingface.co/datasets/meaw0415/NMRGym)
 
@@ -30,8 +30,8 @@ NMRGym provides standardized datasets and evaluation metrics for four key NMR pr
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/nmr-prediction-benchmark.git
-cd nmr-prediction-benchmark
+git clone https://github.com/Meaw0415/NMRGym-Benchmark.git
+cd NMRGym-Benchmark
 ```
 
 2. Open `index.html` in your web browser:
@@ -62,16 +62,16 @@ Then navigate to `http://localhost:8000`
 
 ### Deploy to GitHub Pages
 
-1. Create a new repository on GitHub named `nmr-prediction-benchmark`
+1. Create a new repository on GitHub named `NMRGym-Benchmark`
 
 2. Initialize git and push your code:
 ```bash
-cd nmr-prediction-benchmark
+cd NMRGym-Benchmark
 git init
 git add .
-git commit -m "Initial commit: NMR Prediction Benchmark website"
+git commit -m "Initial commit: NMRGym website"
 git branch -M main
-git remote add origin https://github.com/yourusername/nmr-prediction-benchmark.git
+git remote add origin https://github.com/Meaw0415/NMRGym-Benchmark.git
 git push -u origin main
 ```
 
@@ -81,12 +81,12 @@ git push -u origin main
    - Under **Source**, select `main` branch and `/ (root)` folder
    - Click **Save**
 
-4. Your site will be published at: `https://yourusername.github.io/nmr-prediction-benchmark`
+4. Your site will be published at: `https://meaw0415.github.io/NMRGym-Benchmark`
 
 ## Project Structure
 
 ```
-nmr-prediction-benchmark/
+NMRGym-Benchmark/
 ├── index.html          # Main HTML file
 ├── css/
 │   └── style.css      # Stylesheet
@@ -165,7 +165,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 - **Email**: contact@nmr-benchmark.org
-- **GitHub Issues**: [https://github.com/yourusername/nmr-prediction-benchmark/issues](https://github.com/yourusername/nmr-prediction-benchmark/issues)
+- **GitHub Issues**: [https://github.com/Meaw0415/NMRGym-Benchmark/issues](https://github.com/Meaw0415/NMRGym-Benchmark/issues)
 
 ## Acknowledgments
 
