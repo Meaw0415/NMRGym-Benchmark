@@ -19,29 +19,29 @@ const leaderboardTable = document.querySelector('.leaderboard-table-full tbody')
 // Sample data for different tasks (you can replace this with actual data)
 const leaderboardData = {
     all: [
-        { rank: 1, model: 'NMRMind +Formula', institution: 'Research Lab', avg: 0.712, task1: 0.755, task2: '-', task3: '-', task4: '-', date: '2025-12' },
-        { rank: 2, model: 'NMR2Struct', institution: 'University', avg: 0.634, task1: 0.620, task2: 0.612, task3: '-', task4: '-', date: '2025-11' },
-        { rank: 3, model: 'NMRNet', institution: 'Institute', avg: 0.879, task1: '-', task2: '-', task3: '-', task4: 0.879, date: '2025-10' }
+        { rank: 1, model: 'NMRMind +Formula', avg: 0.712, task1: 0.755, task2: '-', task3: '-', task4: '-', date: '2025-12' },
+        { rank: 2, model: 'NMR2Struct', avg: 0.634, task1: 0.620, task2: 0.612, task3: '-', task4: '-', date: '2025-11' },
+        { rank: 3, model: 'NMRNet', avg: 0.879, task1: '-', task2: '-', task3: '-', task4: 0.879, date: '2025-10' }
     ],
     task1: [
-        { rank: 1, model: 'NMRMind +Formula', institution: 'Research Lab', score: 0.755, metric: 'Top-1: 15.49%', date: '2025-12' },
-        { rank: 2, model: 'NMR-Solver +Formula', institution: 'Research Lab', score: 0.683, metric: 'Top-1: 12.41%', date: '2025-11' },
-        { rank: 3, model: 'NMRMind', institution: 'Research Lab', score: 0.651, metric: 'Top-1: 11.75%', date: '2025-11' }
+        { rank: 1, model: 'NMRMind +Formula', score: 0.755, metric: 'Top-1: 15.49%', date: '2025-12' },
+        { rank: 2, model: 'NMR-Solver +Formula', score: 0.683, metric: 'Top-1: 12.41%', date: '2025-11' },
+        { rank: 3, model: 'NMRMind', score: 0.651, metric: 'Top-1: 11.75%', date: '2025-11' }
     ],
     task2: [
-        { rank: 1, model: 'NMR2Struct', institution: 'University', score: 0.612, metric: 'Macro F1: 61.22%', date: '2025-11' },
-        { rank: 2, model: 'XGBoost', institution: 'Open Source', score: 0.555, metric: 'Macro F1: 55.47%', date: '2025-10' },
-        { rank: 3, model: 'Random Forest', institution: 'Open Source', score: 0.486, metric: 'Macro F1: 48.64%', date: '2025-10' }
+        { rank: 1, model: 'NMR2Struct', score: 0.612, metric: 'Macro F1: 55.44%', date: '2025-11' },
+        { rank: 2, model: 'XGBoost', score: 0.555, metric: 'Macro F1: 55.47%', date: '2025-10' },
+        { rank: 3, model: 'Random Forest', score: 0.486, metric: 'Macro F1: 48.64%', date: '2025-10' }
     ],
     task3: [
-        { rank: 1, model: 'CNN', institution: 'Open Source', score: 0.206, metric: 'Macro F1: 20.58%', date: '2025-10' },
-        { rank: 2, model: 'MLP', institution: 'Open Source', score: 0.188, metric: 'Macro F1: 18.76%', date: '2025-10' },
-        { rank: 3, model: 'XGBoost', institution: 'Open Source', score: 0.077, metric: 'Macro F1: 7.68%', date: '2025-10' }
+        { rank: 1, model: 'CNN', score: 0.206, metric: 'Macro F1: 20.58%', date: '2025-10' },
+        { rank: 2, model: 'MLP', score: 0.188, metric: 'Macro F1: 18.76%', date: '2025-10' },
+        { rank: 3, model: 'XGBoost', score: 0.077, metric: 'Macro F1: 7.68%', date: '2025-10' }
     ],
     task4: [
-        { rank: 1, model: 'NMRNet (¹³C)', institution: 'Institute', score: 0.908, metric: 'Set Sim: 0.908', date: '2025-10' },
-        { rank: 2, model: 'NMRNet (¹H)', institution: 'Institute', score: 0.705, metric: 'Set Sim: 0.705', date: '2025-10' },
-        { rank: 3, model: 'Cascade (¹³C)-DFTNN', institution: 'Research', score: 0.445, metric: 'Set Sim: 0.445', date: '2025-09' }
+        { rank: 1, model: 'NMRNet (¹³C)', score: 0.908, metric: 'Set Sim: 0.908', date: '2025-10' },
+        { rank: 2, model: 'NMRNet (¹H)', score: 0.705, metric: 'Set Sim: 0.705', date: '2025-10' },
+        { rank: 3, model: 'Cascade (¹³C)-DFTNN', score: 0.445, metric: 'Set Sim: 0.445', date: '2025-09' }
     ]
 };
 
@@ -56,12 +56,11 @@ function updateLeaderboard(filter) {
             <tr>
                 <td>${row.rank}</td>
                 <td>${row.model}</td>
-                <td>${row.institution}</td>
                 <td>${row.avg.toFixed(3)}</td>
-                <td>${row.task1.toFixed(3)}</td>
-                <td>${row.task2.toFixed(3)}</td>
-                <td>${row.task3.toFixed(3)}</td>
-                <td>${row.task4.toFixed(3)}</td>
+                <td>${row.task1 === '-' ? '-' : row.task1.toFixed(3)}</td>
+                <td>${row.task2 === '-' ? '-' : row.task2.toFixed(3)}</td>
+                <td>${row.task3 === '-' ? '-' : row.task3.toFixed(3)}</td>
+                <td>${row.task4 === '-' ? '-' : row.task4.toFixed(3)}</td>
                 <td>${row.date}</td>
             </tr>
         `).join('');
@@ -71,9 +70,8 @@ function updateLeaderboard(filter) {
             <tr>
                 <td>${row.rank}</td>
                 <td>${row.model}</td>
-                <td>${row.institution}</td>
                 <td>${row.score.toFixed(3)}</td>
-                <td colspan="4">${row.metric}</td>
+                <td colspan="3">${row.metric}</td>
                 <td>${row.date}</td>
             </tr>
         `).join('');

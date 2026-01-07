@@ -6,6 +6,7 @@
     <title>Full Leaderboard - NMRGym</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         .full-leaderboard {
             padding: 4rem 0;
@@ -73,6 +74,43 @@
             background-color: var(--background-alt);
             border-bottom: 2px solid var(--border-color);
         }
+        .chart-container {
+            background-color: var(--background);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 3rem;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-top: 1rem;
+        }
+        .chart-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .chart-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background-color: var(--background);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+        .chart-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        .chart-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +141,20 @@
             <div class="task-section">
                 <h2>Task 1: NMR2SMILES - Structure Elucidation</h2>
                 <p>Predict molecular structures (SMILES) from NMR spectra</p>
+
+                <!-- Interactive Chart -->
+                <div class="chart-container">
+                    <h3>Performance Comparison</h3>
+                    <div class="chart-controls">
+                        <button class="chart-btn active" onclick="updateChart('seq-level')">Sequence-Level</button>
+                        <button class="chart-btn" onclick="updateChart('token-level')">Token-Level</button>
+                        <button class="chart-btn" onclick="updateChart('morgan')">Morgan Similarity</button>
+                        <button class="chart-btn" onclick="updateChart('torsion')">Torsion Similarity</button>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="nmr2smilesChart"></canvas>
+                    </div>
+                </div>
 
                 <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Sequence-Level & Token-Level Performance</h3>
                 <table class="full-table">
@@ -243,12 +295,12 @@
                         <tr>
                             <td>12</td>
                             <td>ChefNMR-L (Finetune)</td>
-                            <td>0.00</td>
-                            <td>17.37</td>
-                            <td>0.00</td>
-                            <td>25.37</td>
-                            <td>0.00</td>
-                            <td>28.49</td>
+                            <td>1.93</td>
+                            <td>13.59</td>
+                            <td>4.36</td>
+                            <td>25.92</td>
+                            <td>5.66</td>
+                            <td>30.07</td>
                         </tr>
                     </tbody>
                 </table>
@@ -340,6 +392,16 @@
                         </tr>
                         <tr>
                             <td>8</td>
+                            <td>ChefNMR-L (Finetune)</td>
+                            <td>20.29</td>
+                            <td>37.62</td>
+                            <td>22.15</td>
+                            <td>41.57</td>
+                            <td>30.68</td>
+                            <td>53.97</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
                             <td>DiffNMR</td>
                             <td>9.05</td>
                             <td>13.33</td>
@@ -378,11 +440,11 @@
                         <tr>
                             <td>1</td>
                             <td>NMR2Struct</td>
-                            <td>93.30</td>
-                            <td>93.30</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>61.22</td>
+                            <td>92.23</td>
+                            <td>92.23</td>
+                            <td>58.62</td>
+                            <td>83.24</td>
+                            <td>55.44</td>
                             <td>81.69</td>
                             <td>36.25</td>
                         </tr>
@@ -619,5 +681,263 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        // Chart data for NMR2SMILES
+        const chartData = {
+            'seq-level': {
+                labels: ['Top-1', 'Top-5', 'Top-10'],
+                datasets: [
+                    {
+                        label: 'NMRMind +Formula',
+                        data: [15.49, 29.82, 34.03],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver +Formula',
+                        data: [12.41, 29.82, 33.27],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRMind',
+                        data: [11.75, 23.22, 27.00],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver',
+                        data: [4.54, 11.60, 15.06],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRFormer',
+                        data: [1.75, 2.81, 3.30],
+                        borderColor: 'rgb(168, 85, 247)',
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        tension: 0.3
+                    }
+                ]
+            },
+            'token-level': {
+                labels: ['Top-1', 'Top-5', 'Top-10'],
+                datasets: [
+                    {
+                        label: 'NMRMind +Formula',
+                        data: [40.82, 60.00, 64.40],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRMind',
+                        data: [36.96, 54.71, 59.08],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver +Formula',
+                        data: [23.04, 38.53, 40.87],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRFormer',
+                        data: [22.49, 29.58, 32.32],
+                        borderColor: 'rgb(168, 85, 247)',
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR2Struct',
+                        data: [21.97, 33.65, 38.67],
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        tension: 0.3
+                    }
+                ]
+            },
+            'morgan': {
+                labels: ['Top-1', 'Top-5', 'Top-10'],
+                datasets: [
+                    {
+                        label: 'NMRMind +Formula',
+                        data: [65.51, 72.80, 75.07],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRMind',
+                        data: [61.14, 67.83, 70.23],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver +Formula',
+                        data: [43.31, 45.70, 46.11],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR2Struct',
+                        data: [35.18, 43.43, 47.47],
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver',
+                        data: [33.28, 42.88, 46.84],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3
+                    }
+                ]
+            },
+            'torsion': {
+                labels: ['Top-1', 'Top-5', 'Top-10'],
+                datasets: [
+                    {
+                        label: 'NMRMind +Formula',
+                        data: [67.94, 75.63, 77.99],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMRMind',
+                        data: [63.47, 70.57, 73.06],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver +Formula',
+                        data: [44.00, 46.18, 46.54],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR-Solver',
+                        data: [34.63, 45.29, 49.50],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.3
+                    },
+                    {
+                        label: 'NMR2Struct',
+                        data: [32.79, 42.64, 47.28],
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        tension: 0.3
+                    }
+                ]
+            }
+        };
+
+        let currentChart = null;
+        let currentChartType = 'seq-level';
+
+        function updateChart(chartType) {
+            currentChartType = chartType;
+
+            // Update button states
+            document.querySelectorAll('.chart-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Destroy existing chart
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            // Create new chart
+            const ctx = document.getElementById('nmr2smilesChart').getContext('2d');
+            const data = chartData[chartType];
+
+            currentChart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: chartType === 'seq-level' ? 'Sequence-Level Accuracy (%)' :
+                                  chartType === 'token-level' ? 'Token-Level Accuracy (%)' :
+                                  chartType === 'morgan' ? 'Morgan Fingerprint Similarity (Tanimoto %)' :
+                                  'Torsion Fingerprint Similarity (Tanimoto %)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y.toFixed(2) + '%';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Performance (%)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Top-K'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize chart on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateChart('seq-level');
+        });
+    </script>
 </body>
 </html>
