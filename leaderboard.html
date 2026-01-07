@@ -419,6 +419,19 @@
                 <h2>Task 2: NMR2Func - Functional Group Prediction</h2>
                 <p>Multi-label functional group classification from NMR spectra</p>
 
+                <!-- Interactive Radar Chart -->
+                <div class="chart-container">
+                    <h3>Multi-Metric Performance Comparison</h3>
+                    <div class="chart-controls">
+                        <button class="chart-btn active" onclick="updateFuncChart('all-models')">All Models</button>
+                        <button class="chart-btn" onclick="updateFuncChart('top3')">Top 3 Models</button>
+                        <button class="chart-btn" onclick="updateFuncChart('classic')">Classic Methods</button>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="nmr2funcChart"></canvas>
+                    </div>
+                </div>
+
                 <table class="full-table">
                     <thead>
                         <tr>
@@ -515,6 +528,20 @@
             <div class="task-section">
                 <h2>Task 3: NMR2Tox - Toxicity Prediction</h2>
                 <p>Multi-label toxicity classification from NMR spectra</p>
+
+                <!-- Interactive Bar Chart -->
+                <div class="chart-container">
+                    <h3>Model Performance Comparison</h3>
+                    <div class="chart-controls">
+                        <button class="chart-btn active" onclick="updateToxChart('macro-f1')">Macro F1</button>
+                        <button class="chart-btn" onclick="updateToxChart('micro-f1')">Micro F1</button>
+                        <button class="chart-btn" onclick="updateToxChart('subset-acc')">Subset Accuracy</button>
+                        <button class="chart-btn" onclick="updateToxChart('all-metrics')">All Metrics</button>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="nmr2toxChart"></canvas>
+                    </div>
+                </div>
 
                 <table class="full-table">
                     <thead>
@@ -937,6 +964,375 @@
         // Initialize chart on page load
         window.addEventListener('DOMContentLoaded', function() {
             updateChart('seq-level');
+        });
+
+        // Chart data for NMR2Func (Task 2) - Radar Chart
+        const funcChartData = {
+            'all-models': {
+                labels: ['Macro Acc', 'Micro Acc', 'Macro F1', 'Micro F1', 'Subset Acc'],
+                datasets: [
+                    {
+                        label: 'NMR2Struct',
+                        data: [92.23, 92.23, 55.44, 81.69, 36.25],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        pointBackgroundColor: 'rgb(37, 99, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(37, 99, 235)'
+                    },
+                    {
+                        label: 'CLAMS',
+                        data: [91.20, 91.20, 53.36, 79.82, 32.48],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        pointBackgroundColor: 'rgb(16, 185, 129)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(16, 185, 129)'
+                    },
+                    {
+                        label: 'XGBoost',
+                        data: [91.71, 91.71, 55.47, 81.47, 35.51],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    },
+                    {
+                        label: 'Random Forest',
+                        data: [91.34, 91.34, 48.64, 79.02, 31.98],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        pointBackgroundColor: 'rgb(239, 68, 68)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(239, 68, 68)'
+                    },
+                    {
+                        label: 'CNN',
+                        data: [88.69, 88.69, 44.40, 76.29, 28.32],
+                        borderColor: 'rgb(168, 85, 247)',
+                        backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                        pointBackgroundColor: 'rgb(168, 85, 247)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(168, 85, 247)'
+                    }
+                ]
+            },
+            'top3': {
+                labels: ['Macro Acc', 'Micro Acc', 'Macro F1', 'Micro F1', 'Subset Acc'],
+                datasets: [
+                    {
+                        label: 'NMR2Struct',
+                        data: [92.23, 92.23, 55.44, 81.69, 36.25],
+                        borderColor: 'rgb(37, 99, 235)',
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        pointBackgroundColor: 'rgb(37, 99, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(37, 99, 235)'
+                    },
+                    {
+                        label: 'XGBoost',
+                        data: [91.71, 91.71, 55.47, 81.47, 35.51],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    },
+                    {
+                        label: 'CLAMS',
+                        data: [91.20, 91.20, 53.36, 79.82, 32.48],
+                        borderColor: 'rgb(16, 185, 129)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        pointBackgroundColor: 'rgb(16, 185, 129)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(16, 185, 129)'
+                    }
+                ]
+            },
+            'classic': {
+                labels: ['Macro Acc', 'Micro Acc', 'Macro F1', 'Micro F1', 'Subset Acc'],
+                datasets: [
+                    {
+                        label: 'XGBoost',
+                        data: [91.71, 91.71, 55.47, 81.47, 35.51],
+                        borderColor: 'rgb(245, 158, 11)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    },
+                    {
+                        label: 'Random Forest',
+                        data: [91.34, 91.34, 48.64, 79.02, 31.98],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        pointBackgroundColor: 'rgb(239, 68, 68)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(239, 68, 68)'
+                    },
+                    {
+                        label: 'MLP',
+                        data: [87.31, 87.31, 37.14, 71.74, 24.94],
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.2)',
+                        pointBackgroundColor: 'rgb(236, 72, 153)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(236, 72, 153)'
+                    }
+                ]
+            }
+        };
+
+        let funcChart = null;
+
+        function updateFuncChart(filterType) {
+            const ctx = document.getElementById('nmr2funcChart').getContext('2d');
+            const data = funcChartData[filterType];
+
+            // Update button states
+            document.querySelectorAll('.task-section:nth-of-type(2) .chart-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Destroy existing chart
+            if (funcChart) {
+                funcChart.destroy();
+            }
+
+            // Create new radar chart
+            funcChart = new Chart(ctx, {
+                type: 'radar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Functional Group Prediction Performance (%)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.r.toFixed(2) + '%';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart data for NMR2Tox (Task 3) - Bar Chart
+        const toxChartData = {
+            'macro-f1': {
+                labels: ['CNN', 'MLP', 'XGBoost', 'Random Forest'],
+                datasets: [{
+                    label: 'Macro F1 (%)',
+                    data: [20.58, 18.76, 7.68, 3.22],
+                    backgroundColor: [
+                        'rgba(37, 99, 235, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(239, 68, 68, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(37, 99, 235)',
+                        'rgb(16, 185, 129)',
+                        'rgb(245, 158, 11)',
+                        'rgb(239, 68, 68)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            'micro-f1': {
+                labels: ['CNN', 'MLP', 'XGBoost', 'Random Forest'],
+                datasets: [{
+                    label: 'Micro F1 (%)',
+                    data: [26.42, 21.55, 7.94, 4.07],
+                    backgroundColor: [
+                        'rgba(37, 99, 235, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(239, 68, 68, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(37, 99, 235)',
+                        'rgb(16, 185, 129)',
+                        'rgb(245, 158, 11)',
+                        'rgb(239, 68, 68)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            'subset-acc': {
+                labels: ['Random Forest', 'XGBoost', 'CNN', 'MLP'],
+                datasets: [{
+                    label: 'Subset Accuracy (%)',
+                    data: [51.19, 50.77, 32.08, 28.45],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(37, 99, 235, 0.7)',
+                        'rgba(16, 185, 129, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(239, 68, 68)',
+                        'rgb(245, 158, 11)',
+                        'rgb(37, 99, 235)',
+                        'rgb(16, 185, 129)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            'all-metrics': {
+                labels: ['CNN', 'MLP', 'XGBoost', 'Random Forest'],
+                datasets: [
+                    {
+                        label: 'Macro F1',
+                        data: [20.58, 18.76, 7.68, 3.22],
+                        backgroundColor: 'rgba(37, 99, 235, 0.7)',
+                        borderColor: 'rgb(37, 99, 235)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Micro F1',
+                        data: [26.42, 21.55, 7.94, 4.07],
+                        backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                        borderColor: 'rgb(16, 185, 129)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Subset Acc',
+                        data: [32.08, 28.45, 50.77, 51.19],
+                        backgroundColor: 'rgba(245, 158, 11, 0.7)',
+                        borderColor: 'rgb(245, 158, 11)',
+                        borderWidth: 2
+                    }
+                ]
+            }
+        };
+
+        let toxChart = null;
+
+        function updateToxChart(metricType) {
+            const ctx = document.getElementById('nmr2toxChart').getContext('2d');
+            const data = toxChartData[metricType];
+
+            // Update button states
+            document.querySelectorAll('.task-section:nth-of-type(3) .chart-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Destroy existing chart
+            if (toxChart) {
+                toxChart.destroy();
+            }
+
+            // Create new bar chart
+            toxChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: metricType === 'all-metrics',
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: metricType === 'all-metrics' ? 'All Metrics Comparison' :
+                                  metricType === 'macro-f1' ? 'Macro F1 Score (%)' :
+                                  metricType === 'micro-f1' ? 'Micro F1 Score (%)' :
+                                  'Subset Accuracy (%)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y.toFixed(2) + '%';
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Performance (%)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Model'
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize Task 2 and Task 3 charts on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateFuncChart('all-models');
+            updateToxChart('macro-f1');
         });
     </script>
 </body>
