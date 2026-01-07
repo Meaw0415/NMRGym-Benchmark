@@ -162,9 +162,17 @@ If you use this benchmark in your research, please cite:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## About
+
+NMRGym is developed and maintained by the **AIMS Lab** (AI for Molecule and Science) at **The Hong Kong University of Science and Technology (Guangzhou)**.
+
+- **AIMS Lab**: [https://github.com/AIMS-HKUSTGZ](https://github.com/AIMS-HKUSTGZ)
+- **PI Homepage**: [https://junxia97.github.io/](https://junxia97.github.io/)
+
 ## Contact
 
-- **Email**: contact@nmr-benchmark.org
+- **Students**: zfang723@connect.hkust-gz.edu.cn
+- **Principal Investigator**: junxia@hkust-gz.edu.cn
 - **GitHub Issues**: [https://github.com/Meaw0415/NMRGym-Benchmark/issues](https://github.com/Meaw0415/NMRGym-Benchmark/issues)
 
 ## Acknowledgments
@@ -175,4 +183,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Made with ❤️ for the computational chemistry community**
+**Made with ❤️ by AIMS Lab, HKUST(GZ) for the computational chemistry community**
