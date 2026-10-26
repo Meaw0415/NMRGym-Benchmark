@@ -6,14 +6,32 @@ A comprehensive benchmark suite for evaluating machine learning models on Nuclea
 
 📊 **Dataset**: [https://huggingface.co/datasets/meaw0415/NMRGym](https://huggingface.co/datasets/meaw0415/NMRGym)
 
+## Evaluation scripts
+
+Python entry points, input formats, metric definitions, reference-data export,
+and runnable examples are documented in [docs/EVALUATION.md](docs/EVALUATION.md).
+The metrics follow [NMRGym, arXiv:2601.15763v1](https://arxiv.org/abs/2601.15763v1),
+Section 3.3. Run from this repository's root:
+
+```bash
+python -m pip install -r requirements-chem.txt
+python -m unittest discover -s tests -v
+bash scripts/evaluate_examples.sh
+python -m nmrgym_eval --help
+```
+
+The examples write JSON reports to `results/`. Use your own reference files and
+saved model predictions for evaluation; each report records input hashes and
+the chosen evaluation settings.
+
 ## Overview
 
 NMRGym provides standardized datasets and evaluation metrics for four key NMR prediction tasks:
 
-1. **Chemical Shift Prediction** - Predict ¹H and ¹³C NMR chemical shifts from molecular structures
-2. **Coupling Constant Prediction** - Predict J-coupling constants between nuclei
-3. **Spectrum Reconstruction** - Reconstruct full NMR spectra from molecular structures
-4. **Structure Elucidation** - Predict molecular structures from experimental NMR spectra
+1. **Structure Elucidation (NMR2Mol)** - Predict molecular structures from NMR spectra
+2. **Functional Group Prediction (NMR2FG)** - Predict functional-group labels from NMR spectra
+3. **Toxicity Prediction (NMR2Tox)** - Predict toxicity labels from NMR spectra
+4. **Spectral Simulation (Mol2NMR)** - Predict ¹H and ¹³C peak positions from molecular structures
 
 ## Features
 
@@ -143,7 +161,9 @@ We welcome contributions! Please feel free to submit a Pull Request.
 
 ## Dataset
 
-The benchmark datasets will be made available upon publication. For early access, please contact us at contact@nmr-benchmark.org.
+Dataset files are hosted on [Hugging Face](https://huggingface.co/datasets/meaw0415/NMRGym).
+See [the evaluation guide](docs/EVALUATION.md#reference-data) for a versioned
+download example, checksum, and JSONL export commands.
 
 ## Citation
 

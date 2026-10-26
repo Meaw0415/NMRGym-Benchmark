@@ -1,0 +1,3 @@
+# Tested evaluator environment. No GPU or model framework is needed.
+numpy==2.3.5
+scipy==1.17.0

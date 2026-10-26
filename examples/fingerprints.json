@@ -1,0 +1,26 @@
+{
+  "morgan": {
+    "radius": 2,
+    "countSimulation": false,
+    "includeChirality": false,
+    "useBondTypes": true,
+    "onlyNonzeroInvariants": false,
+    "includeRingMembership": true,
+    "countBounds": null,
+    "includeRedundantEnvironments": false
+  },
+  "torsion": {
+    "includeChirality": false,
+    "torsionAtomCount": 4,
+    "countSimulation": true,
+    "countBounds": [1, 2, 4, 8]
+  },
+  "atom_pair": {
+    "minDistance": 1,
+    "maxDistance": 30,
+    "includeChirality": false,
+    "use2D": true,
+    "countSimulation": true,
+    "countBounds": [1, 2, 4, 8]
+  }
+}
