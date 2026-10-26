@@ -1,68 +1,26 @@
-# Data Directory
+# Evaluation data
 
-This directory is intended to store benchmark datasets and related files.
+Download the reference splits from [Hugging Face](https://huggingface.co/datasets/meaw0415/NMRGym).
+[The evaluation guide](../docs/EVALUATION.md#reference-data) provides a versioned
+test download, SHA-256 verification, and export commands for all four tasks.
+Keep downloaded files and generated JSONL under `data/local/` (git-ignored).
 
-## Recommended Structure
+The evaluator reads UTF-8 JSONL, with one object per sample and a unique string
+`id`. References and predictions are separate files joined by ID, not by row
+order. All reference IDs must have prediction records.
 
-```
-data/
-├── task1_chemical_shift/
-│   ├── train.csv
-│   ├── val.csv
-│   ├── test.csv (hidden/not included)
-│   └── README.md
-├── task2_coupling_constant/
-│   ├── train.csv
-│   ├── val.csv
-│   ├── test.csv (hidden/not included)
-│   └── README.md
-├── task3_spectrum_reconstruction/
-│   ├── train/
-│   ├── val/
-│   ├── test/ (hidden/not included)
-│   └── README.md
-└── task4_structure_elucidation/
-    ├── train/
-    ├── val/
-    ├── test/ (hidden/not included)
-    └── README.md
-```
+| Task | Reference fields | Prediction fields |
+| --- | --- | --- |
+| Structure | `id`, `smiles`; optional `tokens` | `id`, ranked `candidates`; optional `candidate_tokens` |
+| Functional groups | `id`, `labels` | `id`, binary `labels` or probability `scores` |
+| Toxicity | `id`, `labels` | `id`, binary `labels` or probability `scores` |
+| Spectral simulation, one nucleus per run | `id`, `peaks` in ppm | `id`, `peaks` in ppm; `null`/`[]` for unavailable predictions |
 
-## Data Format Examples
+Classification needs an ordered label-name schema. Supplied schemas live in
+`configs/`; choose the one matching the source array's column order. See
+`examples/` for small synthetic reference/prediction pairs and
+[docs/EVALUATION.md](../docs/EVALUATION.md) for score conventions and commands.
 
-### Task 1: Chemical Shift Prediction
-
-CSV format with columns:
-- `molecule_id`: Unique identifier
-- `smiles`: SMILES string of the molecule
-- `atom_index`: Index of the atom
-- `chemical_shift`: Chemical shift value (ppm)
-- `nucleus`: Type of nucleus (1H or 13C)
-
-### Task 2: Coupling Constant Prediction
-
-CSV format with columns:
-- `molecule_id`: Unique identifier
-- `smiles`: SMILES string
-- `atom_i`: First atom index
-- `atom_j`: Second atom index
-- `coupling_constant`: J-coupling value (Hz)
-- `coupling_type`: Type (1J, 2J, 3J)
-
-### Task 3: Spectrum Reconstruction
-
-Directory structure with:
-- `{molecule_id}.json`: Contains molecule info and spectrum array
-- Format: `{"smiles": "...", "spectrum": [...]}`
-
-### Task 4: Structure Elucidation
-
-Directory structure with:
-- `{molecule_id}_spectrum.json`: Input NMR spectrum data
-- `{molecule_id}_structure.smi`: Target SMILES structure
-
-## Note
-
-The actual dataset files are not included in this repository. They will be made available for download separately.
-
-For access to the datasets, please visit the website or contact the maintainers.
+`python -m nmrgym_eval.export` converts a NMRGym list-of-dictionaries pickle
+to this reference format, retaining row order and peak multiplicities. It
+writes a manifest alongside the output with source SHA-256 and export settings.

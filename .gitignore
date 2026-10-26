@@ -18,3 +18,11 @@ node_modules/
 # Ignore temporary files
 *.tmp
 temp/
+
+# Python evaluation environments, outputs, and local datasets
+.venv/
+__pycache__/
+*.py[cod]
+results/
+data/local/
+*.pkl
